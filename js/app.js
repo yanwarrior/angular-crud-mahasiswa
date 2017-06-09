@@ -1,0 +1,1 @@
+var appMahasiswa = angular.module('AppMahasiswa', []);

@@ -1,1 +1,2 @@
-var appMahasiswa = angular.module('AppMahasiswa', []);
+var mahasiswaModule = angular.module('Mahasiswa', []);
+

@@ -1,32 +1,25 @@
-appMahasiswa.controller('MahasiswaController', function($scope, MahasiswaService) {
-	$scope.dataMahasiswa = MahasiswaService.all();
+mahasiswaModule.controller('MahasiswaController', function(MahasiswaModel, MahasiswaHelper) {
+	var main = this; // same as $scope
+	main.mahasiswas = MahasiswaModel.getMahasiswas();
+
+	main.createMahasiswa = function() {
+		main.mahasiswas.push({
+			uid: MahasiswaHelper.buildUid(main.mahasiswas),
+			'nim': '1111XXXXXXX',
+			'name': 'Mahasiswa Name',
+			'email': 'example@mail.com',
+			'note': 'Though, you might want to consider doing this server-side if possible: it will be cleaner and work for people without JS.'
+		})
+	}
 	
-	$scope.refresMahasiswa = function() {
-		$scope.dataMahasiswa = MahasiswaService.all();
+	main.setCurrentMahasiswa = function(mahasiswa) {
+		main.currentMahasiswa = mahasiswa;
 	}
 
-	$scope.saveMahasiswa = function() {
-		console.log($scope.newMahasiswa);
-		MahasiswaService.save($scope.newMahasiswa);
-		$scope.newMahasiswa = {};
-		$('#myModal').modal('hide');
+	main.removeMahasiswa = function(mahasiswa) {
+		main.currentMahasiswa = mahasiswa;
+		main.mahasiswas.pop(main.currentMahasiswa);
+		main.currentMahasiswa = {};
 	}
-
-	$scope.deleteMahasiswa = function(id) {
-		MahasiswaService.delete(id);
-		if ($scope.newMahasiswa.id == id) { $scope.newMahasiswa = {}; }
-		$scope.refresMahasiswa();
-	}
-
-	$scope.editMahasiswa = function(id) {
-		$scope.newMahasiswa = angular.copy(MahasiswaService.get(id));
-		$('#myModal').modal('show');
-	}
-
-	$scope.clearMahasiswa = function() {
-		$scope.newMahasiswa = {};
-	}
-
-
 
 });

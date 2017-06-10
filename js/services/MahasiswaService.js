@@ -11,8 +11,17 @@ mahasiswaModule.factory('MahasiswaHelper', function() {
 		
 	}
 
+	var getIndexFromObject = function(mahasiswa, mahasiswas) {
+		for (index in mahasiswas) {
+			if (mahasiswas[index].uid == mahasiswa.uid) {
+				return index;
+			}
+		}
+	}
+
 	return {
-		buildUid: buildUid
+		buildUid: buildUid,
+		getIndexFromObject: getIndexFromObject
 	}
 });
 

@@ -18,7 +18,10 @@ mahasiswaModule.controller('MahasiswaController', function(MahasiswaModel, Mahas
 
 	main.removeMahasiswa = function(mahasiswa) {
 		main.currentMahasiswa = mahasiswa;
-		main.mahasiswas.pop(main.currentMahasiswa);
+		// get index object mahasiswa dari service factory
+		index = MahasiswaHelper.getIndexFromObject(main.currentMahasiswa, main.mahasiswas)
+		console.log(index);
+		main.mahasiswas.splice(index, 1);
 		main.currentMahasiswa = {};
 	}
 
